@@ -11,44 +11,6 @@ running(){
  fi
 }
 
-start__(){
-
-start_
-
-sleep 10
-
-while [ true ]
-do
-    running
-    if [ $? = 1 ]
-        then
-            echo "Serveur eteind, redemarrage auto dans 10 sec !"
-            sleep 10
-            stop_
-            COMMAND="java -Xms256M -Xmx1G -server -Xrs -XX:ThreadPriorityPolicy=42 -XX:+TieredCompilation -XX:TargetSurvivorRatio=90 -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=15 -XX:+UnlockExperimentalVMOptions -XX:+UseBiasedLocking -XX:UseSSE=3 -XX:+UseCodeCacheFlushing -XX:+UseThreadPriorities   -XX:+UseFastAccessorMethods -XX:+AggressiveOpts -XX:+ReduceSignalUsage -XX:+UseInterpreter -XX:+UseFastEmptyMethods -XX:+UseSharedSpaces -XX:AllocatePrefetchStyle=1 -XX:+AlwaysCompileLoopMethods -XX:SharedReadOnlySize=30m -XX:+UseConcMarkSweepGC -XX:+RewriteFrequentPairs -XX:+OptimizeStringConcat -XX:+CMSCleanOnEnter -XX:+UseSplitVerifier -XX:+UseInlineCaches -jar $FILE nogui"
-            screen -dmS $BASENAME $COMMAND
-            sleep 10
-        fi
-done
-
-sleep 1
-
-while true
-do
-    running
-    if [ $? = 1 ]
-        then
-            echo "Serveur eteind, redemarrage auto dans 10 sec !"
-            sleep 10
-            stop_
-            COMMAND="java -Xms256M -Xmx1G -server -Xrs -XX:ThreadPriorityPolicy=42 -XX:+TieredCompilation -XX:TargetSurvivorRatio=90 -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=15 -XX:+UnlockExperimentalVMOptions -XX:+UseBiasedLocking -XX:UseSSE=3 -XX:+UseCodeCacheFlushing -XX:+UseThreadPriorities   -XX:+UseFastAccessorMethods -XX:+AggressiveOpts -XX:+ReduceSignalUsage -XX:+UseInterpreter -XX:+UseFastEmptyMethods -XX:+UseSharedSpaces -XX:AllocatePrefetchStyle=1 -XX:+AlwaysCompileLoopMethods -XX:SharedReadOnlySize=30m -XX:+UseConcMarkSweepGC -XX:+RewriteFrequentPairs -XX:+OptimizeStringConcat -XX:+CMSCleanOnEnter -XX:+UseSplitVerifier -XX:+UseInlineCaches -jar $FILE nogui"
-            screen -dmS $BASENAME $COMMAND
-        fi
-done
-
-
-}
-
 if [ -z $1 ]
 then
     echo "Usage : {start|stop|status|screen|restart}"
@@ -121,9 +83,6 @@ then
     then
         stop_
         echo stopping
-    elif [ $1 = "test" ]
-    then    
-        testloop
     elif [ $1 = "screen" ]
     then
         screen_
